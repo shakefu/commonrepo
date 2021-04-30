@@ -1,0 +1,4 @@
+commonrepo:
+  source:
+    - https://github.com/shakefu/commonrepo
+    - https://github.com/shakefu/home
