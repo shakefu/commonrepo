@@ -1,0 +1,5 @@
+upstream:
+  - url: https://github.com/shakefu/commonrepo
+    ref: wip
+    rename:
+      - "^testdata/fixtures/single_source.yml$": ".commonrepo.yml"

@@ -1,46 +1,29 @@
-package commonrepo
+package commonrepo_test
 
 import (
-	"fmt"
-	"os"
 	"testing"
 
-	"github.com/MakeNowJust/heredoc/v2"
+	. "github.com/shakefu/commonrepo"
+
 	. "github.com/onsi/gomega"
-	goblin "github.com/shakefu/goblin"
+	"github.com/shakefu/goblin"
+	// . "github.com/shakefu/commonrepo/internal/testutil"
 )
 
 func TestCommonRepo(t *testing.T) {
+	// Initialize the Goblin test suite
 	g := goblin.Goblin(t)
 	RegisterFailHandler(func(m string, _ ...int) { g.Fail(m) }) // Gomega hook
-	g.Describe("GetLocalRepo", func() {
-		g.It("should work", func() {
-			repo, err := GetLocalRepo()
-			Expect(err).ShouldNot(HaveOccurred())
-			Expect(repo).ShouldNot(BeNil())
-		})
-	})
 
-	g.Describe("Config", func() {
-		g.Describe("Unmarshal", func() {
-			g.It("should work", func() {
-				data := []byte(heredoc.Doc(`
-				include:
-				- '**/*'`))
-				config := &Config{}
-				err := config.Unmarshal(data)
-				Expect(err).NotTo(HaveOccurred())
-				Expect(config.Include).Should(Equal([]string{"**/*"}))
-			})
-
-			g.It("parses the schema document", func() {
-				data, err := os.ReadFile("./testdata/fixtures/schema.yml")
-				Expect(err).NotTo(HaveOccurred())
-				config := &Config{}
-				err = config.Unmarshal(data)
-				Expect(err).NotTo(HaveOccurred())
-				fmt.Printf("%+v\n", config)
-				Expect(config.Include[0]).Should(Equal("**/*"))
+	g.Describe("commonrepo", func() {
+		g.Describe("Upstreams", func() {
+			g.It("returns the upstreams", func() {
+				cr, _ := NewFrom("testdata/fixtures/local/single.yml", ".")
+				ups, err := cr.Upstreams()
+				Expect(err).ToNot(HaveOccurred())
+				Expect(len(ups)).To(Equal(2))
+				Expect(ups[1].String()).To(HavePrefix("./testdata/fixtures/local/single.yml@"))
+				Expect(ups[0].String()).To(HavePrefix("./@"))
 			})
 		})
 	})

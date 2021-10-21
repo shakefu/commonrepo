@@ -1,0 +1,12 @@
+include: []
+
+template:
+  - "testdata/fixtures/templates/template.yml"
+
+rename:
+  - "testdata/fixtures/templates/template.yml": "templated.yml"
+
+template-vars:
+  project: "commonrepo"
+  version: 1.0.0
+  templated: "true"

@@ -1,0 +1,3 @@
+project: {{.project}}
+version: {{.version}}
+templated: {{or .templated "false"}}
