@@ -1,13 +1,21 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: "Binary Release Action"
+description: "Run a binary release"
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
-    required: true
-    default: '1000'
+  github_token:
+    description: 'GitHub token for action repository'
+    required: false
+    default: ${{ github.token }}
 outputs:
   time: # output will be available to future steps
-    description: 'The current time after waiting'
+    description: 'The current time'
+    value: ${{ steps.run.outputs.time }}
 runs:
-  using: 'node12'
-  main: 'action/dist/index.js'
+  using: composite
+  steps:
+  - uses: KeisukeYamashita/setup-release@v1.0.2
+    with:
+      repository: turo/safe-drop-table
+      token: ${{ inputs.github_token }}
+  - id: binary
+    run: safedrop || true
+    shell: bash

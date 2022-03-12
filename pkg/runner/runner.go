@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/shakefu/commonrepo/memrepo"
+	"github.com/shakefu/commonrepo/pkg/repos"
 )
 
 // These exist so we can patch them through tests
@@ -19,7 +19,7 @@ func init() {
 }
 
 // Run will invoke the script file found at path in the given repo.
-func Run(path string, repo memrepo.Repo) (err error) {
+func Run(path string, repo *repos.Repo) (err error) {
 	data, err := repo.ReadFile(path)
 	if err != nil {
 		return
@@ -39,7 +39,7 @@ func Run(path string, repo memrepo.Repo) (err error) {
 }
 
 // RunAll invokes all script files found matching glob in the given repo.
-func RunAll(glob string, repo memrepo.Repo) (err error) {
+func RunAll(glob string, repo *repos.Repo) (err error) {
 	paths, err := repo.Glob(glob)
 	if err != nil {
 		return

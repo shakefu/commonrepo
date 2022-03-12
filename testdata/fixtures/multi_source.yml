@@ -1,4 +1,3 @@
-commonrepo:
-  source:
-    - https://github.com/shakefu/commonrepo
-    - https://github.com/shakefu/home
+upstream:
+  - url: https://github.com/shakefu/humbledb
+  - url: https://github.com/shakefu/commonrepo

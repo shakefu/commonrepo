@@ -1,0 +1,19 @@
+include:
+  - "files/**"
+  - "templates/**"
+
+templates:
+  - "templates/**"
+
+rename:
+  - "files/(.*)": "%[1]s"
+  - "templates/(.*)": "%[1]s"
+
+---
+
+upstream:
+  - url: .  # Whatever
+
+vars:
+  # Template context??
+  somevar: ${SOMEVAR:-}

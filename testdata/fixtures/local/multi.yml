@@ -1,0 +1,13 @@
+include:
+- testdata/fixtures/local/multi.yml
+
+rename:
+- "testdata/fixtures/local/multi.yml": "testdata/out/multi.yml"
+
+upstream:
+  - url: .
+    rename:
+      - "fixtures/.commonrepo.yml": ".commonrepo.yml"
+  - url: .
+    rename:
+      - "fixtures/local/single.yml": ".commonrepo.yml"

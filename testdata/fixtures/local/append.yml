@@ -1,0 +1,8 @@
+upstream:
+  - url: .
+    include:
+    - "*.md"
+    exclude:
+    - action.*
+    rename:
+    - ".commonrepo.yml": ".commonrepo.empty.yml"
