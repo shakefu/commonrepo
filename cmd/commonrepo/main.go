@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/shakefu/commonrepo"
 	"github.com/shakefu/commonrepo/pkg/gitutil"
 
 	"github.com/MakeNowJust/heredoc/v2"
@@ -98,7 +99,30 @@ func GetArgs(usage string, argv []string) (args *Args, err error) {
 // Run actually executes the CLI once the args have been parsed and logs set and
 // all the other things that need to happen.
 func Run(args *Args) (err error) {
-	golog.Info("We're runnning")
+	golog.Info("We're running")
+	err = DefaultRun()
+	return
+}
+
+// DefaultRun does a bunch of default settings ... mostly for testing
+// TODO: Add a dry-run flag
+// TODO: Add sensible logging across the whole thing
+// TODO: Debug why it just says "remote repository is empty"
+func DefaultRun() (err error) {
+	repoRoot, err := gitutil.FindLocalRepoPath()
+	if err != nil {
+		return
+	}
+	cr, err := commonrepo.New(repoRoot)
+	if err != nil {
+		return
+	}
+	err = cr.Init()
+	if err != nil {
+		return
+	}
+	composite := cr.Composite()
+	err = composite.Write()
 	return
 }
 
