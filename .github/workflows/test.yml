@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
+        # secrets.MULTIFIELD_JSON =
         # {
         #   "field1": "value1",
         #   "field2": true,
@@ -20,11 +21,11 @@ jobs:
         #   }
         # }
         echo "Whole JSON: ${{ secrets.MULTIFIELD_JSON }}"
-        echo "field1: ${{ secrets.field1 }}"
-        echo "field2: ${{ secrets.field2 }}"
-        echo "field3: ${{ secrets.field3 }}"
-        echo "subfield: ${{ secrets.field3.subfield }}"
-        echo "floats: ${{ secrets.field3.floats }}"
+        echo "field1: ${{ secrets.MULTIFIELD_JSON.field1 }}"
+        echo "field2: ${{ secrets.MULTIFIELD_JSON.field2 }}"
+        echo "field3: ${{ secrets.MULTIFIELD_JSON.field3 }}"
+        echo "subfield: ${{ secrets.MULTIFIELD_JSON.field3.subfield }}"
+        echo "floats: ${{ secrets.MULTIFIELD_JSON.field3.floats }}"
   # unit tests
   units:
     runs-on: ubuntu-latest
