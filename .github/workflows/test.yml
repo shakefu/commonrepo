@@ -22,10 +22,10 @@ jobs:
         # }
         echo "Whole JSON: ${{ secrets.MULTIFIELD_JSON }}"
         echo "field1: ${{ fromJson(secrets.MULTIFIELD_JSON).field1 }}"
-        echo "field2: ${{ secrets.MULTIFIELD_JSON.field2 }}"
-        echo "field3: ${{ secrets.MULTIFIELD_JSON.field3 }}"
-        echo "subfield: ${{ secrets.MULTIFIELD_JSON.field3.subfield }}"
-        echo "floats: ${{ secrets.MULTIFIELD_JSON.field3.floats }}"
+        echo "field2: ${{ fromJson(secrets.MULTIFIELD_JSON).field2 }}"
+        echo "field3: ${{ fromJson(secrets.MULTIFIELD_JSON).field3 }}"
+        echo "subfield: ${{ fromJson(secrets.MULTIFIELD_JSON).field3.subfield }}"
+        echo "floats: ${{ fromJson(secrets.MULTIFIELD_JSON).field3.floats }}"
   # unit tests
   units:
     runs-on: ubuntu-latest
