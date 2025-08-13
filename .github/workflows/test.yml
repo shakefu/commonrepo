@@ -14,7 +14,7 @@ jobs:
       run:
         working-directory: action/
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - run: npm ci
     - run: npm test
 
@@ -22,7 +22,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - uses: ./
       with:
         github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

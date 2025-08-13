@@ -23,7 +23,7 @@ jobs:
       run:
         working-directory: action/
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set Node.js 12.x
         uses: actions/setup-node@v2.5.1
