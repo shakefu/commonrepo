@@ -125,14 +125,14 @@ func TestGitUtil(t *testing.T) {
 					url := "git@github.com:shakefu/humbledb.git"
 					ref, err := FindRef(url, "badtag")
 					Expect(err).ShouldNot(HaveOccurred())
-					Expect(ref).To(BeEquivalentTo("refs/heads/master"))
+					Expect(ref).To(BeEquivalentTo("refs/heads/main"))
 				})
 
 				g.It("returns the default branch for an empty ref", func() {
 					url := "git@github.com:shakefu/humbledb.git"
 					ref, err := FindRef(url, "")
 					Expect(err).ShouldNot(HaveOccurred())
-					Expect(ref).To(BeEquivalentTo("refs/heads/master"))
+					Expect(ref).To(BeEquivalentTo("refs/heads/main"))
 				})
 			})
 		})
